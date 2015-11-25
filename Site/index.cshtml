@@ -1,8 +1,19 @@
 @{
-var txt = DateTime.Now;
+	double result = Chart1.DataManipulator.Statistics.NormalDistribution(1.96);
 }
 <html>
-	<body>
-		<p>The DateTime is @txt </p>
+	<head>
+		<meta charset="utf-8">
+		<title>Option Pricing</title>
+	</head>
+	<body style="background-color: #1A00AA">
+		<form action="" method="post">
+			<p><label for="S0">Цена актива:</label><br>
+			<input type="text" name="S0"/></p>
+
+			<p><label for="K">Страйк-цена опциона:</label><br>
+			<input type="text" name="K"/></p>
+		</form>
+		<p>The result is @result</p>
 	</body>
 </html>
