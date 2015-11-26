@@ -9,11 +9,11 @@ if(IsPost){
 
 	 var Kind = Request["Type"];
 	double Price = 0.0, Strike = 0.0, Risk = 0.0, Vol = 0.0, Time = 0.0;
-	var P = double.TryParse(Request["Price"], out Price);
-	var S = double.TryParse(Request["Strike"], out Strike);
-	var R = double.TryParse(Request["Risk"], out Risk);
-	var V = double.TryParse(Request["Vol"], out Vol);
-	var T = double.TryParse(Request["Time"], out Time);}
+	bool P = double.TryParse(Request["Price"], out Price);
+	bool S = double.TryParse(Request["Strike"], out Strike);
+	bool R = double.TryParse(Request["Risk"], out Risk);
+	bool V = double.TryParse(Request["Vol"], out Vol);
+	bool T = double.TryParse(Request["Time"], out Time);
 	
 	if (P && S && R && V && T)
 	{
@@ -85,7 +85,7 @@ if(IsPost){
 		<form style="background-color: #FFFFFF; padding: 10px; border-style: solid; width: 500px">
 		<center>
 		<p>@Message</p>
-		<p>@ErrorMessage</p>
+		<p style="text-color: #FF0000">@ErrorMessage</p>
 		</center>
 		</form>
 		</center>
