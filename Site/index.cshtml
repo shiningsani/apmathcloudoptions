@@ -1,21 +1,43 @@
 @using System.Web.UI.DataVisualization.Charting
 @{
-var chart = new System.Web.UI.DataVisualization.Charting.Chart();
-var formula = chart.DataManipulator.Statistics.NormalDistribution(0);
+var optionprice = 0;
+var formula = 0;
+(IfPost){
+	if (type == "Call"){
+	var d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
+	var chart = new System.Web.UI.DataVisualization.Charting.Chart();
+	var formula = chart.DataManipulator.Statistics.NormalDistribution(d1);}
+}
 }
 <html>
 	<head>
 		<meta charset="utf-8">
 		<title>Option Pricing</title>
 	</head>
-	<body style="background-color: #1A00AA">
-		<form action="" method="post">
-			<p><label for="S0">Цена актива:</label><br>
-			<input type="text" name="S0"/></p>
+	<body style="background-color: #B6CDFB; text-color: #000000">
+		<form style="background-color: #FFFFFF; padding: 10px; border-style: solid" action="" method="post">
+			<select name="type">
+				<option value="Call"> Call-option </option>
+				<option value="Put"> Put-option </option>
+			</select>
+			<p><label for="Price">Asset price:</label><br>
+			<input type="text" name="Price"/></p>
 
-			<p><label for="K">Страйк-цена опциона:</label><br>
-			<input type="text" name="K"/></p>
+			<p><label for="Strike">Strike-price of option:</label><br>
+			<input type="text" name="Strike"/></p>
+
+			<p><label for="Time">Time left (part of year):</label><br>
+			<input type="text" name="Time"/></p>
+
+			<p><label for="Vol">Volatility:</label><br>
+			<input type="text" name="Vol"/></p>
+
+			<p><label for="Risk">Risk-free interest rate:</label><br>
+			<input type="text" name="Risk"/></p>
+
+			<p><input type="submit" value="Count" /></p>
 		</form>
-		<p>The result is @formula</p>
+
+		<p>@formula</p>
 	</body>
 </html>
