@@ -1,9 +1,9 @@
 @using System.Web.UI.DataVisualization.Charting
 @{
 double optionprice = 0.0;
-
+var Kind = "your";
 if(IsPost){
-	var Kind = Request["Type"];
+	Kind = Request["Type"];
 	double Price = double.Parse(Request["Price"]);
 	double Strike = double.Parse(Request["Strike"]);
 	double Risk = double.Parse(Request["Risk"]);
