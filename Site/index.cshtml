@@ -3,7 +3,7 @@
 var optionprice = 0;
 var formula = 0;
 if(IsPost){
-	var Type = Request["Type"].AsDecimal();
+	var Type = Request["Type"];
 	var Price = Request["Price"].AsDecimal();
 	var Strike = Request["Strike"].AsDecimal();
 	var Risk = Request["Risk"].AsDecimal();
