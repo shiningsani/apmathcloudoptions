@@ -8,12 +8,12 @@ var ErrorMessage = "";
 if(IsPost){
 
 	Kind = Request["Type"];
-	
-	var P = double.TryParse(Request["Price"], double Price);
-	var S = double.TryParse(Request["Strike"], double Strike);
-	var R = double.TryParse(Request["Risk"], double Risk);
-	var V = double.TryParse(Request["Vol"], double Vol);
-	var T = double.TryParse(Request["Time"], double Time);}
+	double Price = 0.0, Strike = 0.0, Risk = 0.0, Vol = 0.0, Time = 0.0;
+	var P = double.TryParse(Request["Price"], Price);
+	var S = double.TryParse(Request["Strike"], Strike);
+	var R = double.TryParse(Request["Risk"], Risk);
+	var V = double.TryParse(Request["Vol"], Vol);
+	var T = double.TryParse(Request["Time"], Time);}
 	
 	if (P && S && R && V && T)
 	{
