@@ -1,14 +1,17 @@
 @using System.Web.UI.DataVisualization.Charting
 @{
 double optionprice = 0.0;
+var Message = ""
 var Kind = "your";
 if(IsPost){
+
 	Kind = Request["Type"];
 	double Price = double.Parse(Request["Price"]);
 	double Strike = double.Parse(Request["Strike"]);
 	double Risk = double.Parse(Request["Risk"]);
 	double Vol = double.Parse(Request["Vol"]);
 	double Time = double.Parse(Request["Time"]);
+
 	if (Kind == "Call"){
 	double d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
 	double d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
@@ -16,6 +19,17 @@ if(IsPost){
 	double N1 = chart.DataManipulator.Statistics.NormalDistribution(d1);
 	double N2 = chart.DataManipulator.Statistics.NormalDistribution(d2);
 	optionprice = Price*N1 - Strike*Math.Exp(-Risk*Time)*N2;
+	Message = "The price of Call-option is " + optionprice;
+	}
+	
+	if (Kind == "Put"){
+	double d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
+	double d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
+	var chart = new System.Web.UI.DataVisualization.Charting.Chart();
+	double N1 = chart.DataManipulator.Statistics.NormalDistribution(-d1);
+	double N2 = chart.DataManipulator.Statistics.NormalDistribution(-d2);
+	optionprice = -Price*N1 + Strike*Math.Exp(-Risk*Time)*N2;
+	Message = "The price of Put-option is " + optionprice;
 	}
 }
 }
@@ -48,7 +62,7 @@ if(IsPost){
 			<p><input type="submit" value="Count" /></p>
 		</form>
 		<form style="background-color: #FFFFFF; padding: 10px; border-style: solid">
-		<p>The price of @Kind option is @optionprice</p>
+		<p>@Message</p>
 		</form>
 	</body>
 </html>
