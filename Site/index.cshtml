@@ -7,16 +7,15 @@ var Kind = "your";
 if(IsPost){
 
 	Kind = Request["Type"];
-	try{
-	double Price = double.Parse(Request["Price"]);
-	double Strike = double.Parse(Request["Strike"]);
-	double Risk = double.Parse(Request["Risk"]);
-	double Vol = double.Parse(Request["Vol"]);
-	double Time = double.Parse(Request["Time"]);}
-	catch (Exception e){
-		Response.Write(String.Format("alert({0});", "Entered data error!"));
-	}
-
+	
+	var P = double.TryParse(Request["Price"], double Price);
+	var S = double.TryParse(Request["Strike"], double Strike);
+	var R = double.TryParse(Request["Risk"], double Risk);
+	var V = double.TryParse(Request["Vol"], double Vol);
+	var T = double.TryParse(Request["Time"], double Time);}
+	
+	if (P && S && R && V && T)
+	{
 	if (Kind == "Call"){
 	try{
 	double d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
@@ -45,6 +44,8 @@ if(IsPost){
 		Response.Write(String.Format("alert({0});","Wrong values of data!" ));		
 	}
 	}
+	}
+	else Response.Write(String.Format("alert({0});","Can't parse data!" ))
 }
 }
 <html>
