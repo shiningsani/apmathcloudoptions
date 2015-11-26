@@ -4,11 +4,11 @@ var optionprice = 0;
 var formula = 0;
 if(IsPost){
 	var Type = Request["Type"];
-	var Price = Request["Price"].AsDecimal();
-	var Strike = Request["Strike"].AsDecimal();
-	var Risk = Request["Risk"].AsDecimal();
-	var Vol = Request["Vol"].AsDecimal();
-	var Time = Request["Time"].AsDecimal();
+	var Price = double.Parse(Request["Price"]);
+	var Strike = double.Parse(Request["Strike"]);
+	var Risk = double.Parse(Request["Risk"]);
+	var Vol = double.Parse(Request["Vol"]);
+	var Time = double.Parse(Request["Time"]);
 	if (Type == "Call"){
 	var d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
 	var d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
