@@ -9,11 +9,11 @@ if(IsPost){
 
 	 var Kind = Request["Type"];
 	double Price = 0.0, Strike = 0.0, Risk = 0.0, Vol = 0.0, Time = 0.0;
-	var P = double.TryParse(Request["Price"], Price);
-	var S = double.TryParse(Request["Strike"], Strike);
-	var R = double.TryParse(Request["Risk"], Risk);
-	var V = double.TryParse(Request["Vol"], Vol);
-	var T = double.TryParse(Request["Time"], Time);}
+	var P = double.TryParse(Request["Price"], out Price);
+	var S = double.TryParse(Request["Strike"], out Strike);
+	var R = double.TryParse(Request["Risk"], out Risk);
+	var V = double.TryParse(Request["Vol"], out Vol);
+	var T = double.TryParse(Request["Time"], out Time);}
 	
 	if (P && S && R && V && T)
 	{
