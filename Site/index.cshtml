@@ -2,7 +2,7 @@
 @{
 var optionprice = 0;
 var formula = 0;
-(IfPost){
+if(IsPost){
 	if (type == "Call"){
 	var d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
 	var chart = new System.Web.UI.DataVisualization.Charting.Chart();
