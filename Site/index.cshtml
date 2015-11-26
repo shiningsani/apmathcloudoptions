@@ -1,7 +1,7 @@
 @using System.Web.UI.DataVisualization.Charting
 @{
-var optionprice = 0;
-var formula = 0;
+var optionprice = 0.0;
+
 if(IsPost){
 	var Type = Request["Type"];
 	var Price = double.Parse(Request["Price"]);
@@ -48,6 +48,6 @@ if(IsPost){
 			<p><input type="submit" value="Count" /></p>
 		</form>
 
-		<p>@formula</p>
+		<p>@optionprice</p>
 	</body>
 </html>
