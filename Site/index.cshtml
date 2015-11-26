@@ -1,20 +1,20 @@
 @using System.Web.UI.DataVisualization.Charting
 @{
-var optionprice = 0.0;
+double optionprice = 0.0;
 
 if(IsPost){
 	var Type = Request["Type"];
-	var Price = double.Parse(Request["Price"]);
-	var Strike = double.Parse(Request["Strike"]);
-	var Risk = double.Parse(Request["Risk"]);
-	var Vol = double.Parse(Request["Vol"]);
-	var Time = double.Parse(Request["Time"]);
+	double Price = double.Parse(Request["Price"]);
+	double Strike = double.Parse(Request["Strike"]);
+	double Risk = double.Parse(Request["Risk"]);
+	double Vol = double.Parse(Request["Vol"]);
+	double Time = double.Parse(Request["Time"]);
 	if (Type == "Call"){
-	var d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
-	var d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
+	double d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
+	double d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
 	var chart = new System.Web.UI.DataVisualization.Charting.Chart();
-	var N1 = chart.DataManipulator.Statistics.NormalDistribution(d1);
-	var N2 = chart.DataManipulator.Statistics.NormalDistribution(d2);
+	double N1 = chart.DataManipulator.Statistics.NormalDistribution(d1);
+	double N2 = chart.DataManipulator.Statistics.NormalDistribution(d2);
 	optionprice = Price*N1 - Strike*Math.Exp(-Risk*Time)*N2;
 	}
 }
