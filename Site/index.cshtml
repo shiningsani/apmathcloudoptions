@@ -1,3 +1,4 @@
+@using System.IO
 @using System.Web.UI.DataVisualization.Charting
 @{
 double optionprice = 0.0;
@@ -6,30 +7,43 @@ var Kind = "your";
 if(IsPost){
 
 	Kind = Request["Type"];
+	try{
 	double Price = double.Parse(Request["Price"]);
 	double Strike = double.Parse(Request["Strike"]);
 	double Risk = double.Parse(Request["Risk"]);
 	double Vol = double.Parse(Request["Vol"]);
-	double Time = double.Parse(Request["Time"]);
+	double Time = double.Parse(Request["Time"]);}
+	catch (Exception e){
+		Response.Write(String.Format("alert({0});", "Entered data error!"));
+	}
 
 	if (Kind == "Call"){
+	try{
 	double d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
 	double d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
 	var chart = new System.Web.UI.DataVisualization.Charting.Chart();
 	double N1 = chart.DataManipulator.Statistics.NormalDistribution(d1);
 	double N2 = chart.DataManipulator.Statistics.NormalDistribution(d2);
 	optionprice = Price*N1 - Strike*Math.Exp(-Risk*Time)*N2;
-	Message = "The price of Call-option is " + optionprice;
+	Message = "The price of Call-option is " + optionprice;}
+	catch (Exception e)
+	{
+		Response.Write(String.Format("alert({0});","Wrong values of data!" ));
+	}
 	}
 
 	if (Kind == "Put"){
+	try{
 	double d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
 	double d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
 	var chart = new System.Web.UI.DataVisualization.Charting.Chart();
 	double N1 = chart.DataManipulator.Statistics.NormalDistribution(-d1);
 	double N2 = chart.DataManipulator.Statistics.NormalDistribution(-d2);
 	optionprice = -Price*N1 + Strike*Math.Exp(-Risk*Time)*N2;
-	Message = "The price of Put-option is " + optionprice;
+	Message = "The price of Put-option is " + optionprice;}
+	catch (Exception e){
+		Response.Write(String.Format("alert({0});","Wrong values of data!" ));		
+	}
 	}
 }
 }
@@ -39,7 +53,9 @@ if(IsPost){
 		<title>Option Pricing</title>
 	</head>
 	<body style="background-color: #B6CDFB; text-color: #000000">
-		<form style="background-color: #FFFFFF; padding: 10px; border-style: solid" action="" method="post">
+	<center>
+		<form style="background-color: #FFFFFF; padding: 10px; border-style: solid; width: 500px" action="" method="post">
+		<center>
 			<select name="Type">
 				<option value="Call"> Call-option </option>
 				<option value="Put"> Put-option </option>
@@ -60,9 +76,13 @@ if(IsPost){
 			<input type="text" name="Risk"/></p>
 
 			<p><input type="submit" value="Count" /></p>
+		</center>
 		</form>
-		<form style="background-color: #FFFFFF; padding: 10px; border-style: solid">
+		<form style="background-color: #FFFFFF; padding: 10px; border-style: solid; width: 500px">
+		<center>
 		<p>@Message</p>
+		</center>
 		</form>
+		</center>
 	</body>
 </html>
