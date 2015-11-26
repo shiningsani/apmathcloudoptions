@@ -3,7 +3,7 @@
 var optionprice = 0;
 var formula = 0;
 if(IsPost){
-	if (type == "Call"){
+	if (Type.value == "Call"){
 	var d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
 	var chart = new System.Web.UI.DataVisualization.Charting.Chart();
 	var formula = chart.DataManipulator.Statistics.NormalDistribution(d1);}
@@ -16,7 +16,7 @@ if(IsPost){
 	</head>
 	<body style="background-color: #B6CDFB; text-color: #000000">
 		<form style="background-color: #FFFFFF; padding: 10px; border-style: solid" action="" method="post">
-			<select name="type">
+			<select name="Type">
 				<option value="Call"> Call-option </option>
 				<option value="Put"> Put-option </option>
 			</select>
