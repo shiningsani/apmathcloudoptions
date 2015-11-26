@@ -17,39 +17,39 @@ if(IsPost){
 	
 	if (P && S && R && V && T)
 	{
-	if (Kind == "Call"){
-	try{
-	double d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
-	double d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
-	var chart = new System.Web.UI.DataVisualization.Charting.Chart();
-	double N1 = chart.DataManipulator.Statistics.NormalDistribution(d1);
-	double N2 = chart.DataManipulator.Statistics.NormalDistribution(d2);
-	optionprice = Price*N1 - Strike*Math.Exp(-Risk*Time)*N2;
-	Message = "The price of Call-option is " + optionprice;}
-	catch (Exception e)
-	{
-		Response.Write(String.Format("alert({0});","Wrong values of data!" ));
-	}
-	}
+		if (Kind == "Call"){
+			try{
+				double d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
+				double d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
+				var chart = new System.Web.UI.DataVisualization.Charting.Chart();
+				double N1 = chart.DataManipulator.Statistics.NormalDistribution(d1);
+				double N2 = chart.DataManipulator.Statistics.NormalDistribution(d2);
+				optionprice = Price*N1 - Strike*Math.Exp(-Risk*Time)*N2;
+				Message = "The price of Call-option is " + optionprice;}
+			catch (Exception e)
+				{
+					Response.Write(String.Format("alert({0});","Wrong values of data!" ));
+				}
+			}
 
-	if (Kind == "Put"){
-	try{
-	double d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
-	double d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
-	var chart = new System.Web.UI.DataVisualization.Charting.Chart();
-	double N1 = chart.DataManipulator.Statistics.NormalDistribution(-d1);
-	double N2 = chart.DataManipulator.Statistics.NormalDistribution(-d2);
-	optionprice = -Price*N1 + Strike*Math.Exp(-Risk*Time)*N2;
-	Message = "The price of Put-option is " + optionprice;}
-	catch (Exception e){
-		Response.Write(String.Format("alert({0});","Wrong values of data!" ));		
-	}
-	}
-	}
+		if (Kind == "Put"){
+			try{
+				double d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
+				double d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
+				var chart = new System.Web.UI.DataVisualization.Charting.Chart();
+				double N1 = chart.DataManipulator.Statistics.NormalDistribution(-d1);
+				double N2 = chart.DataManipulator.Statistics.NormalDistribution(-d2);
+				optionprice = -Price*N1 + Strike*Math.Exp(-Risk*Time)*N2;
+				Message = "The price of Put-option is " + optionprice;}
+			catch (Exception e){
+						Response.Write(String.Format("alert({0});","Wrong values of data!" ));		
+					}
+				}
+			}
 	else {
-	ErrorMessage = "Can't parse your data!";
+			ErrorMessage = "Can't parse your data!";
+		}
 	}
-}
 }
 <html>
 	<head>
