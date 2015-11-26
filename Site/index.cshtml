@@ -1,7 +1,7 @@
 @using System.Web.UI.DataVisualization.Charting
 @{
 double optionprice = 0.0;
-var Message = ""
+var Message = "";
 var Kind = "your";
 if(IsPost){
 
@@ -21,7 +21,7 @@ if(IsPost){
 	optionprice = Price*N1 - Strike*Math.Exp(-Risk*Time)*N2;
 	Message = "The price of Call-option is " + optionprice;
 	}
-	
+
 	if (Kind == "Put"){
 	double d1 = ( Math.Log(Price/Strike) + (Risk + Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
 	double d2 = ( Math.Log(Price/Strike) + (Risk - Math.Pow(Vol, 2.0)/2.0)*Time )/( Vol * Math.Sqrt(Time));
