@@ -1,6 +1,7 @@
+@using System.Web.UI.DataVisualization.Charting
 @{
-	StatisticFormula Chart1 = new StatisticFormula();
-	double result = Chart1.NormalDistribution(1.96);
+var chart = new System.Web.UI.DataVisualization.Charting.Chart();
+var formula = chart.DataManipulator.Statistics.NormalDistribution(0);
 }
 <html>
 	<head>
