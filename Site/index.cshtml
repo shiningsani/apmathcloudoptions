@@ -15,7 +15,7 @@ if(IsPost){
 	var chart = new System.Web.UI.DataVisualization.Charting.Chart();
 	var N1 = chart.DataManipulator.Statistics.NormalDistribution(d1);
 	var N2 = chart.DataManipulator.Statistics.NormalDistribution(d2);
-	var optionprice = Price*N1 - Strike*Math.Exp(-Risk*Time)*N2;
+	optionprice = Price*N1 - Strike*Math.Exp(-Risk*Time)*N2;
 	}
 }
 }
